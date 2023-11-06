@@ -16,7 +16,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.0.0
+          terraform_version: 1.6.3
 
       - name: Configure AWS credentials
         run: |
@@ -27,10 +27,10 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -var "ami=ami-05c13eab67c5d8861" -var "instance_type=t2.micro"
+        run: terraform plan -var "ami=ami-02e94b011299ef128" -var "instance_type=t2.micro"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "ami=ami-05c13eab67c5d8861" -var "instance_type=t2.micro"
+        run: terraform apply -auto-approve -var "ami=ami-02e94b011299ef128" -var "instance_type=t2.micro"
 
       - name: Cleanup
         run: rm -f tfplan
