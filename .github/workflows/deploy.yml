@@ -4,7 +4,7 @@ on:
     branches:
       -Complete-CI/CD-with-Terraform-AWS
 
-
+env:
   TF_USER_AWS_KEY: ${{ secrets.TF_USER_AWS_KEY }}
   TF_USER_AWS_SECRET: ${{ secrets.TF_USER_AWS_SECRET }}
   TF_STATE_BUCKET_NAME: ${{ secrets.AWS_TF_STATE_BUCKET_NAME }}
