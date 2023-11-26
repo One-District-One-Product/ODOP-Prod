@@ -1,8 +1,9 @@
 name: CI/CD with Terraform
+
 on:
   push:
     branches:
-      -Complete-CI/CD-with-Terraform-AWS
+      - Complete-CI/CD-with-Terraform-AWS
 
 env:
   TF_USER_AWS_KEY: ${{ secrets.TF_USER_AWS_KEY }}
@@ -35,7 +36,7 @@ jobs:
           -var="key_name=deployer-key" \
           -out=PLAN
         working-directory: ./terraform
-      -name: Terraform Apply
+      - name: Terraform Apply
         id: apply
-        run: terraform apply PLAN
+        run: terraform apply ./terraform/PLAN
         working-directory: ./terraform
