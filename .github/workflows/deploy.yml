@@ -1,19 +1,21 @@
-name: Basic deploy
+name: Upload Website to s3 bucket
+
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
 
 jobs:
-  EC2-Deploy:
+  deploy:
     runs-on: ubuntu-latest
-    environment: 
-     name: ${{ github.ref_name }}
-     url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-      - id: deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
-        with:
-          aws_access_key_id: ${{ secrets.TF_USER_AWS_KEY }}
-          aws_secret_access_key: ${{ secrets.TF_USER_AWS_SECRET }}
-          aws_default_region: us-east-1
-          app_port: 3000
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --follow-symlinks --delete --exclude '.git*/*'
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_TF_STATE_BUCKET_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.TF_USER_AWS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.TF_USER_AWS_SECRET }}
+        AWS_REGION: 'us-east-1'   
+        SOURCE_DIR: './'    
