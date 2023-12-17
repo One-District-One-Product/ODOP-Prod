@@ -1,41 +1,27 @@
-name: CI/CD with Terraform
+name: Basic deploy
 on:
   push:
-    branches:
-      -Complete-CI/CD-with-Terraform-AWS
-
-env: 
-  TF_USER_AWS_KEY: ${{ secrets.TF_USER_AWS_KEY }}
-  TF_USER_AWS_SECRET: ${{ secrets.TF_USER_AWS_SECRET }}
-  TF_STATE_BUCKET_NAME: ${{ secrets.AWS_TF_STATE_BUCKET_NAME }}
-  PRIVATE_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PRIVATE }}
-  PUBLIC_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PUBLIC }}
-  AWS_REGION: us-east-1
+    branches: [ main ]
 
 jobs:
-  deploy-infra:
+  EC2-Deploy:
     runs-on: ubuntu-latest
+    environment: 
+     name: ${{ github.ref_name }}
+     url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: setup Terraform
-        uses: hashicorp/setup-terraform@v1
+      - id: deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
         with:
-          terraform_wrapper: false
-      - name: Terraform init
-        run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
-        working-directory: ./terraform
-      - name: Terraform Plan
-        id: plan
-        run: |-
-          terraform plan \
-          -var="region=us-east-1" \
-          -var="public_key=$PUBLIC_SSH_KEY" \
-          -var="private_key=$PRIVATE_SSH_KEY" \
-          -var="key_name=deployer-key" \
-          -out=PLAN
-        working-directory: ./terraform
-      -name: Terraform Apply
-        id: apply
-        run: terraform apply PLAN
-        working-directory: ./terraform
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_default_region: us-east-1
+          app_port: 3000
+
+          aws_ec2_instance_type: t3.micro
+          bitops_code_store: true
+          tf_stack_destroy: true 
+          tf_state_bucket_destroy: true
+          ansible_skip: false
+          aws_vpc_create: true
+
