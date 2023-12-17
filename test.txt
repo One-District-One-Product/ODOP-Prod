@@ -1,1 +1,2 @@
 Test 1 : Give administrative accesses
+Test 2: Created new user with new permissions
