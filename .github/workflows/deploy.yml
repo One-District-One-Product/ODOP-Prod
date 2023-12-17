@@ -25,4 +25,4 @@ jobs:
           #tf_stack_destroy: true
           #tf_state_bucket_destroy: true
           ansible_skip: false
-
+          aws_vpc_create: true
