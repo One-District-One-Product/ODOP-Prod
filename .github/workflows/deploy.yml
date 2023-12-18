@@ -22,7 +22,7 @@ jobs:
 
           aws_ec2_instance_type: t3.micro
           bitops_code_store: true
-          tf_stack_destroy: true
-          tf_state_bucket_destroy: true
+          #tf_stack_destroy: true
+          #tf_state_bucket_destroy: true
           ansible_skip: false
           aws_vpc_create: true
