@@ -26,3 +26,9 @@ jobs:
           #tf_state_bucket_destroy: true
           ansible_skip: false
           aws_vpc_create: true
+        
+      - name: Deploy Server
+        run: |
+            docker pull odop-server
+  
+            docker-compose -f docker-compose.yml up -d
