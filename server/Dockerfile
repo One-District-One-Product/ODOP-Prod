@@ -2,10 +2,10 @@
 FROM node:16
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /app/server
 
 # Copy package.json and package-lock.json to the working directory
-COPY . /app
+COPY . /app/server
 
 # Install dependencies
 RUN npm install
