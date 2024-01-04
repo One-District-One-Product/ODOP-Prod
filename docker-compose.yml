@@ -9,8 +9,6 @@ services:
       - "3000:3000"
     expose:
       - "3000"
-    depends_on:
-      - server
     tty: true
     stdin_open: true
   server:
@@ -21,5 +19,7 @@ services:
       - "8000:8000"
     expose:
       - "8000"
+    depends_on:
+      - client
     tty: true
     stdin_open: true
