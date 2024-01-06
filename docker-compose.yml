@@ -5,18 +5,20 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+    image: odop-pd
     ports:
       - "3000:3000"
     expose:
       - "3000"
-    depends_on:
-      - server
+    #depends_on:
+    #  - server
     tty: true
     stdin_open: true
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
+    image: odop-server-pd
     ports:
       - "8000:8000"
     expose:
