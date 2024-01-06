@@ -1,29 +1,27 @@
 version: '3.8'
 
 services:
-  client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    #image: odop-pd
-    ports:
-      - "3000:3000"
-    expose:
-      - "3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:8000
-    tty: true
-    stdin_open: true
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
-    #image: odop-server-pd
     ports:
       - "8000:8000"
     expose:
       - "8000"
     environment:
       - PORT=8000
+    tty: true
+    stdin_open: true
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
     tty: true
     stdin_open: true
