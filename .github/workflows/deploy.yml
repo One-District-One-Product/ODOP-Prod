@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Start Docker Compose
         run: |
-          cd ODOP-Prod  
+          cd myproject/ODOP-Prod  
           docker-compose -f .github/workflows/docker-compose.yml up -d
 
       - id: deploy
