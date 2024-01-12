@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: Start Docker Compose
         run: |
-          cd ODOP-Prod
-          docker-compose up -d
+          docker-compose -f ODOP-Prod/docker-compose.yml up -d
 
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
