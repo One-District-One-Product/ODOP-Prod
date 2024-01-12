@@ -10,11 +10,10 @@ jobs:
      name: ${{ github.ref_name }}
      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-      - name: Change to ODOP-Prod directory
-        run: cd /
-
       - name: Start Docker Compose
-        run: docker-compose.yml up -d
+        run: |
+          cd ODOP-Prod  
+          docker-compose -f .github/workflows/docker-compose.yml up -d
 
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
