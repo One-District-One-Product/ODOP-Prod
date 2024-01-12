@@ -11,7 +11,7 @@ jobs:
      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
       - name: Change to ODOP-Prod directory
-        run: cd ODOP-Prod
+        run: cd /
 
       - name: Start Docker Compose
         run: docker-compose up -d
