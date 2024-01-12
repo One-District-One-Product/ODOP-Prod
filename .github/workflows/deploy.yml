@@ -14,7 +14,7 @@ jobs:
         run: cd /
 
       - name: Start Docker Compose
-        run: docker-compose up -d
+        run: docker-compose.yml up -d
 
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
