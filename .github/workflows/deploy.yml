@@ -11,7 +11,9 @@ jobs:
      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
       - name: Start Docker Compose
-        run: docker-compose up -d
+        run: |
+          cd ODOP-Prod
+          docker-compose up -d
 
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
