@@ -10,7 +10,6 @@ import {
   ProductByCategory,
   CheckoutPage,
 } from "./shop";
-
 import { DashboardAdmin, Categories, Products, Orders } from "./admin";
 import { UserProfile, UserOrders, SettingUser } from "./shop/dashboardUser";
 
