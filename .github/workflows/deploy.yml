@@ -13,7 +13,7 @@ jobs:
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
         with:
-          aws_resource_identifier: xyz-test37
+          aws_resource_identifier: xyz-test38
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: us-east-1
